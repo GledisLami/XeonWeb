@@ -4,6 +4,7 @@ import com.Xeon.XeonWeb.entities.Porosia;
 import com.Xeon.XeonWeb.entities.Projekti;
 import com.Xeon.XeonWeb.repositories.PorosiaRepository;
 import com.Xeon.XeonWeb.repositories.ProjektiRepository;
+import com.Xeon.XeonWeb.repositories.UserRepository;
 import com.Xeon.XeonWeb.requests.PorosiaRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,14 +22,17 @@ public class PorosiaService {
     @Autowired
     private ProjektiRepository projektiRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public List<Porosia> getAllPorosia() {
         return porosiaRepository.findAll();
     }
 
-    public void savePorosi(Integer userId, PorosiaRequest porosiaRequest){
+    public void savePorosi(Integer userId, String comments) {
         Porosia porosia = new Porosia();
         porosia.setUserId(userId);
-        porosia.setComments(porosiaRequest.getComments());
+        porosia.setComments(comments);
         porosia.setStatusi(0);
         porosiaRepository.save(porosia);
         //pasi ruhet porosia, popollojme nje objekt projekti dhe e ruajme ne databaze
@@ -51,16 +55,21 @@ public class PorosiaService {
     }
 
     @Transactional
-    public void updatePorosia(PorosiaRequest porosiaRequest){
-        Porosia porosia = porosiaRepository.findById(porosiaRequest.getId()).
+    public void updatePorosia(Integer porosiaId, String comments, Integer userId){
+        Porosia porosia = porosiaRepository.findById(porosiaId).
                 orElseThrow(() -> new IllegalStateException(
-                "Porosia nr " + porosiaRequest.getId() + " nuk ekziston"));
-        if (porosiaRequest.getComments() != null && porosiaRequest.getComments().length() > 0) {
-            porosia.setComments(porosiaRequest.getComments());
+                "Porosia nr " + porosiaId + " nuk ekziston"));
+        if (comments != null && comments.length() > 0) {
+            porosia.setComments(comments);
         }
+        if (userRepository.findById(userId).isPresent()) {
+            porosia.setUserId(userId);
+        }
+        /* Mund te shtohet me vone
         if (porosiaRequest.getStatusi() == 1 || porosiaRequest.getStatusi() == 0) {
             porosia.setStatusi(porosiaRequest.getStatusi());
         }
+         */
     }
 
     @Transactional

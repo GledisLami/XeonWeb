@@ -3,7 +3,6 @@ package com.Xeon.XeonWeb.requests;
 
 import lombok.Data;
 
-import javax.persistence.Column;
 
 @Data
 public class ProjektiRequest {

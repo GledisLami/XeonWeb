@@ -11,8 +11,8 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/porosia")
-public class PorosiaController {
+@RequestMapping("/financa")
+public class FinancaController {
 
     @Autowired
     private PorosiaService porosiaService;
@@ -26,13 +26,14 @@ public class PorosiaController {
     }
 
     @PostMapping("/save")
-    public String savePorosi(Principal auth, @RequestBody PorosiaRequest porosiaRequest) {
+    public String savePorosi(Principal auth,
+                             @RequestParam String comments) {
 
 //        if (!(userService.findByUsername(auth.getName()).isPresent())) {
 //            return "Porosia nuk u ruajt";
 //        }
         Integer userId = userService.findByUsername(auth.getName()).get().getId();
-        porosiaService.savePorosi(userId, porosiaRequest);
+        porosiaService.savePorosi(userId, comments);
         return "Porosia nr u ruajt me sukses";
         //TODO: return id e porosise me anen e nje query qe kthen id te entry me recent ne databaze
         //select scope_identity() as id
@@ -50,10 +51,12 @@ public class PorosiaController {
     }
 
     @PutMapping("/update")
-    public String updatePorosia(PorosiaRequest porosiaRequest) {
+    public String updatePorosia(@RequestParam Integer porosiaId,
+                                @RequestParam(required = false) String comments,
+                                @RequestParam(required = false) Integer userId) {
         try {
-            porosiaService.updatePorosia(porosiaRequest);
-            return "Porosia nr "+ porosiaRequest.getId() + " u ndryshua me sukses";
+            porosiaService.updatePorosia(porosiaId, comments, userId);
+            return "Porosia nr "+ porosiaId + " u ndryshua me sukses";
         } catch (IllegalStateException e) {
             return e.getMessage();
         }
