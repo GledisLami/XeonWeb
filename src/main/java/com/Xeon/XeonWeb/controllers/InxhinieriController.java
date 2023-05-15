@@ -67,21 +67,34 @@ public class InxhinieriController {
     }
 
     //lista e proceseve nen nje projekt
-    @GetMapping("/{projektiId}/proceset")
-    public List<Optional<Procesi>> getAllProceset(@PathVariable Integer projektiId) {
+    @GetMapping("/proceset")
+    public List<Optional<Procesi>> getAllProceset(@RequestParam Integer projektiId) {
         return procesiService.getAllProceset(projektiId);
     }
 
-    @PostMapping("/{projektiId}/proceset/save")
+    @PostMapping("/proceset/save")
     public String saveProces(Principal auth,
-                             @PathVariable Integer projektiId,
+                             @RequestParam Integer projektiId,
                              @RequestParam String procesi,
                              @RequestParam Integer koha,
-                             @RequestParam String makineria,
-                             @RequestParam String tipiProcesit) {
+                             @RequestParam String makineria) {
 
+//        if (!(userService.findByUsername(auth.getName()).isPresent())) {
+//            return "Porosia nuk u ruajt";
+//        }
         Integer userId = userService.findByUsername(auth.getName()).get().getId();
-        procesiService.saveProces(userId, projektiId, procesi, koha, makineria, tipiProcesit);
+        procesiService.saveProces(userId, projektiId, procesi, koha, makineria);
+        return "Procesi u shtua me sukses";
+    }
+
+    @PostMapping("/proceset/saveTest")
+    public String saveProcesTest(@RequestParam Integer userId,
+                             @RequestParam Integer projektiId,
+                             @RequestParam String procesi,
+                             @RequestParam Integer koha,
+                             @RequestParam String makineria) {
+
+        procesiService.saveProces(userId, projektiId, procesi, koha, makineria);
         return "Procesi u shtua me sukses";
     }
 

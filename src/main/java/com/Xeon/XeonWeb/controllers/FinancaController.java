@@ -1,7 +1,6 @@
 package com.Xeon.XeonWeb.controllers;
 
 import com.Xeon.XeonWeb.entities.Porosia;
-import com.Xeon.XeonWeb.requests.PorosiaRequest;
 import com.Xeon.XeonWeb.services.PorosiaService;
 import com.Xeon.XeonWeb.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +13,20 @@ import java.util.List;
 @RequestMapping("/financa")
 public class FinancaController {
 
-    //TODO: create json formats for all mappings that have multiple parameters
+    //TODO:
+    /*
+    -create json formats for all mappings that have multiple parameters
+    -bej nje json te ri per projektin ku ben return dhe statusin e porosise, mbase i tregon vetem ato
+    -return id e porosise me anen e nje query qe kthen id te entry me recent ne databaze
+    select scope_identity() as id
+    -username unik ne entry
+     */
 
     @Autowired
-    private PorosiaService porosiaService;
+    private  PorosiaService porosiaService;
 
     @Autowired
-    private UserService userService;
+    private  UserService userService;
 
     @GetMapping
     public List<Porosia> getAllPorosia() {
@@ -31,14 +37,13 @@ public class FinancaController {
     public String savePorosi(Principal auth,
                              @RequestParam String comments) {
 
+        //supozohet qe te jemi bere login, pra ekziston useri patjeter
 //        if (!(userService.findByUsername(auth.getName()).isPresent())) {
 //            return "Porosia nuk u ruajt";
 //        }
         Integer userId = userService.findByUsername(auth.getName()).get().getId();
         porosiaService.savePorosi(userId, comments);
-        return "Porosia nr u ruajt me sukses";
-        //TODO: return id e porosise me anen e nje query qe kthen id te entry me recent ne databaze
-        //select scope_identity() as id
+        return "Porosia u ruajt me sukses";
     }
 
     //for adding a new porosia object
@@ -52,7 +57,7 @@ public class FinancaController {
         }
          */
         porosiaService.savePorosi(userId, comments);
-        return "Porosia nr  "+ userId  +"u ruajt me sukses";
+        return "Porosia nr  "+ userId  +" u ruajt me sukses";
     }
 
     @DeleteMapping("/delete")
@@ -73,6 +78,26 @@ public class FinancaController {
         try {
             porosiaService.updatePorosia(porosiaId, comments, userId);
             return "Porosia nr "+ porosiaId + " u ndryshua me sukses";
+        } catch (IllegalStateException e) {
+            return e.getMessage();
+        }
+    }
+
+    @PutMapping("/mirato")
+    public String miratoPorosi(@RequestParam Integer porosiaId) {
+        try {
+            porosiaService.miratoPorosi(porosiaId);
+            return "Porosia nr "+ porosiaId + " u miratua me sukses";
+        } catch (IllegalStateException e) {
+            return e.getMessage();
+        }
+    }
+
+    @PutMapping("/refuzo")
+    public String refuzoPorosi(@RequestParam Integer porosiaId) {
+        try {
+            porosiaService.refuzoPorosi(porosiaId);
+            return "Porosia nr "+ porosiaId + " u refuzua me sukses";
         } catch (IllegalStateException e) {
             return e.getMessage();
         }

@@ -4,7 +4,6 @@ import com.Xeon.XeonWeb.entities.Procesi;
 import com.Xeon.XeonWeb.entities.Projekti;
 import com.Xeon.XeonWeb.services.ProcesiService;
 import com.Xeon.XeonWeb.services.ProjektiService;
-import com.Xeon.XeonWeb.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

@@ -3,7 +3,6 @@ package com.Xeon.XeonWeb.services;
 import com.Xeon.XeonWeb.entities.Porosia;
 import com.Xeon.XeonWeb.entities.Projekti;
 import com.Xeon.XeonWeb.repositories.PorosiaRepository;
-import com.Xeon.XeonWeb.repositories.ProcesiRepository;
 import com.Xeon.XeonWeb.repositories.ProjektiRepository;
 import com.Xeon.XeonWeb.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +24,6 @@ public class PorosiaService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private ProcesiRepository procesiRepository;
 
 
     public List<Porosia> getAllPorosia() {
@@ -57,6 +54,18 @@ public class PorosiaService {
         }
     }
 
+    @Transactional
+    public void refuzoPorosi(Integer id) {
+        if (porosiaRepository.findById(id).isPresent()) {
+            porosiaRepository.findById(id).get().setStatusi(2);
+        }
+    }
+
+    //bug: nuk kthen id e porosise se fundit
+//    public Integer getCreatedId(){
+//        return porosiaRepository.findFirstByOrderByIdDesc();
+//    }
+
     public Optional<Porosia> findById(Integer id){
         return porosiaRepository.findById(id);
     }
@@ -85,12 +94,13 @@ public class PorosiaService {
     }
 
     //ne momenitn qe fshihet nje porosi do fshihet projekti dhe proceset perkatese
-    @Transactional
-    public void deletePorosiProjektProcese(Integer id){
-        for (int i = 0; i < procesiRepository.findByProjektId(id).size(); i++) {
-            procesiRepository.deleteById(procesiRepository.findByProjektId(id).get(i).get().getId());
-        }
-        projektiRepository.deleteById(projektiRepository.findByPorosiaId(id).get().getId());
-        porosiaRepository.deleteById(id);
-    }
+    //koment 2: ne databaze fshihen automatikisht nga fshirja e foreign key te porosise
+//    @Transactional
+//    public void deletePorosiProjektProcese(Integer id){
+//        for (int i = 0; i < procesiRepository.findByProjektId(id).size(); i++) {
+//            procesiRepository.deleteById(procesiRepository.findByProjektId(id).get(i).getId());
+//        }
+//        projektiRepository.deleteById(projektiRepository.findByPorosiaId(id).get().getId());
+//        porosiaRepository.deleteById(id);
+//    }
 }
