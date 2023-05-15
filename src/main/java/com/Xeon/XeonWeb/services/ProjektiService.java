@@ -27,10 +27,10 @@ public class ProjektiService {
     public List<Projekti> getAllProjekte() {
         return projektiRepository.findAll();
     }
-
-    public void saveProjekt(Projekti projekti){
-        projektiRepository.save(projekti);
-    }
+    //projekti ruhe automatikisht kur krijohet nje porosi
+//    public void saveProjekt(Projekti projekti){
+//        projektiRepository.save(projekti);
+//    }
 
     @Transactional
     public void updateProjekt(Integer id,String comment, Integer userId) {
@@ -46,6 +46,7 @@ public class ProjektiService {
             }
         }
     }
+    //todo: fshij te tere proceset
     @Transactional
     public void deleteProjekti(Integer id){
         projektiRepository.deleteById(id);
@@ -54,11 +55,17 @@ public class ProjektiService {
     @Transactional
     public void updateTime(Integer projektiId){
         List<Optional<Procesi>> procesiList = procesiRepository.findByProjektId(projektiId);
+        //nqs nuk gjendet thjesht mos bej set kohen sepse eshte null
+        if (!projektiRepository.findById(projektiId).isPresent()) {
+            return;
+        }
         Projekti projekti = projektiRepository.findById(projektiId).get();
+        int totalKoha = 0;
         for (Optional<Procesi> procesi : procesiList) {
-            if (procesi.get().getFazaId() != 2) {
-                projekti.setAfati(projekti.getAfati() + procesi.get().getKoha());
+            if (procesi.isPresent() && procesi.get().getFazaId() != 2) {
+                totalKoha += procesi.get().getKoha();
             }
         }
+        projekti.setAfati(totalKoha);
     }
 }

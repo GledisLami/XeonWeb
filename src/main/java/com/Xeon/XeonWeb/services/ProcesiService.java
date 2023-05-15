@@ -1,10 +1,7 @@
 package com.Xeon.XeonWeb.services;
 
 import com.Xeon.XeonWeb.entities.Procesi;
-import com.Xeon.XeonWeb.repositories.MakineriaRepository;
-import com.Xeon.XeonWeb.repositories.ProcesiRepository;
-import com.Xeon.XeonWeb.repositories.ProjektiRepository;
-import com.Xeon.XeonWeb.repositories.TipiProcesitRepository;
+import com.Xeon.XeonWeb.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,24 +12,17 @@ import java.util.Optional;
 @Service
 public class ProcesiService {
 
-    final ProcesiRepository procesiRepository;
-    final ProjektiRepository projektiRepository;
-    final MakineriaRepository makineriaRepository;
-    final TipiProcesitRepository tipiProcesitRepository;
-    final ProjektiService projektiService;
-
     @Autowired
-    public ProcesiService(ProcesiRepository procesiRepository,
-                          ProjektiRepository projektiRepository,
-                          MakineriaRepository makineriaRepository,
-                          TipiProcesitRepository tipiProcesitRepository,
-                          ProjektiService projektiService) {
-        this.procesiRepository = procesiRepository;
-        this.projektiRepository = projektiRepository;
-        this.makineriaRepository = makineriaRepository;
-        this.tipiProcesitRepository = tipiProcesitRepository;
-        this.projektiService = projektiService;
-    }
+    private ProcesiRepository procesiRepository;
+    @Autowired
+    private ProjektiRepository projektiRepository;
+    @Autowired
+    private MakineriaRepository makineriaRepository;
+    @Autowired
+    private TipiProcesitRepository tipiProcesitRepository;
+    @Autowired
+    private ProjektiService projektiService;
+
 
     public List<Optional<Procesi>> getAllProceset(Integer projektId) {
         return procesiRepository.findByProjektId(projektId);
@@ -40,16 +30,16 @@ public class ProcesiService {
 
     //ruan nje proces te ri. anash shfaqet kush e krijoi(userId)
     //projektiId eshte id e projektit ku do te shtohet procesi
-    public void saveProces(Integer userId, Integer projektiId, String procesi, Integer koha, String makineria, String tipiProcesit) {
+    public void saveProces(Integer userId, Integer projektiId, String procesi, Integer koha, String makineria) {
         Procesi procesiObj = new Procesi();
         procesiObj.setProcesi(procesi);
         procesiObj.setKoha(koha);
         //we don't check it is a dropdown box, so it is always present
         procesiObj.setMakineriaId(makineriaRepository.findByMakineria(makineria).get().getId());
         procesiObj.setTipiProcesitId(tipiProcesitRepository.
-                findByTipiProcesit(tipiProcesit).get().getId());
-        //kur krijohet nje proces 0 eshte kodi per ne pritje
-        procesiObj.setFazaId(0);
+                findByTipiProcesit(procesi).get().getId());
+        //kur krijohet nje proces 1 eshte kodi per ne pritje
+        procesiObj.setFazaId(1);
         procesiObj.setProjektId(projektiId);
         procesiObj.setUserId(userId);
         procesiRepository.save(procesiObj);

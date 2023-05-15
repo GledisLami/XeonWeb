@@ -25,4 +25,6 @@ public class Procesi {
     private Integer makineriaId;
     @Column
     private Integer tipiProcesitId;
+
+    //todo: shto sasine e materialit
 }
