@@ -35,7 +35,6 @@ public class InxhinieriController {
     //Nuk na duhe nje metode krijim projekti pasi krijohet automatikisht kur krijohet nje porosi
 //    @PostMapping("/save")
 //    public String saveProjekt(Principal auth, Projekti projekti){
-//        //TODO: switch projekti to projektRequest sepse nuk mund te perdoret direkt Projekti pasi ka null values
 //        Integer userId = userService.findByUsername(auth.getName()).get().getId();
 //        projekti.setUserId(userId);
 //        projektiService.saveProjekt(projekti);

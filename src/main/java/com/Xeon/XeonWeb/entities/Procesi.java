@@ -16,11 +16,11 @@ public class Procesi {
     @Column
     private Integer koha;
     @Column
-    private Integer ProjektId;
+    private Integer projektId;
     @Column
-    private Integer FazaId;
+    private Integer fazaId;
     @Column
-    private Integer UserId;
+    private Integer userId;
     @Column
     private Integer makineriaId;
     @Column

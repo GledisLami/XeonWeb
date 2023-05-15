@@ -7,8 +7,9 @@ import java.sql.Date;
 
 @Entity
 @Data
-@Table(name = "role")
+@Table(name = "roles")
 public class Role {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;

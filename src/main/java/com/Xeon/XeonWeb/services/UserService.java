@@ -50,8 +50,8 @@ public class UserService {
             if (password != null && password.length() > 0) {
                 user.get().setPassword(password);
             }
-            if (role != null && role.length() > 0 && roleRepository.findByName(role).isPresent()) {
-                user.get().setRoleId(roleRepository.findByName(role).get().getId());
+            if (role != null && role.length() > 0 && roleRepository.findByRole(role).isPresent()) {
+                user.get().setRoleId(roleRepository.findByRole(role).get().getId());
             }
         }
     }

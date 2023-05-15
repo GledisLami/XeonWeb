@@ -19,5 +19,5 @@ public class User {
     private String password;
 
     @Column
-    private Integer RoleId;
+    private Integer roleId;
 }

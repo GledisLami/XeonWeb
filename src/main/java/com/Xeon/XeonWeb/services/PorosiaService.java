@@ -3,9 +3,9 @@ package com.Xeon.XeonWeb.services;
 import com.Xeon.XeonWeb.entities.Porosia;
 import com.Xeon.XeonWeb.entities.Projekti;
 import com.Xeon.XeonWeb.repositories.PorosiaRepository;
+import com.Xeon.XeonWeb.repositories.ProcesiRepository;
 import com.Xeon.XeonWeb.repositories.ProjektiRepository;
 import com.Xeon.XeonWeb.repositories.UserRepository;
-import com.Xeon.XeonWeb.requests.PorosiaRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +25,10 @@ public class PorosiaService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ProcesiRepository procesiRepository;
+
+
     public List<Porosia> getAllPorosia() {
         return porosiaRepository.findAll();
     }
@@ -40,14 +44,17 @@ public class PorosiaService {
         projekti.setComments("");
         projekti.setAfati(0);
         projekti.setPorosiaId(porosia.getId());
+        projekti.setUserId(userId);
         //pasi nuk e dime per ke inxhinier eshte, e vendosim id 111
-        projekti.setUserId(111);
+//        projekti.setUser_id(111);
         projektiRepository.save(projekti);
     }
 
     @Transactional
-    public void miratoPorosi(Integer id){
-        porosiaRepository.findById(id).get().setStatusi(1);
+    public void miratoPorosi(Integer id) {
+        if (porosiaRepository.findById(id).isPresent()) {
+            porosiaRepository.findById(id).get().setStatusi(1);
+        }
     }
 
     public Optional<Porosia> findById(Integer id){
@@ -74,6 +81,16 @@ public class PorosiaService {
 
     @Transactional
     public void deletePorosia(Integer id){
+        porosiaRepository.deleteById(id);
+    }
+
+    //ne momenitn qe fshihet nje porosi do fshihet projekti dhe proceset perkatese
+    @Transactional
+    public void deletePorosiProjektProcese(Integer id){
+        for (int i = 0; i < procesiRepository.findByProjektId(id).size(); i++) {
+            procesiRepository.deleteById(procesiRepository.findByProjektId(id).get(i).get().getId());
+        }
+        projektiRepository.deleteById(projektiRepository.findByPorosiaId(id).get().getId());
         porosiaRepository.deleteById(id);
     }
 }

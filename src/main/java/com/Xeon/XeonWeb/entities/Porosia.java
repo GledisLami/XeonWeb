@@ -19,6 +19,6 @@ public class Porosia {
     private Integer statusi;
 
     @Column
-    private Integer UserId;
+    private Integer userId;
 
 }

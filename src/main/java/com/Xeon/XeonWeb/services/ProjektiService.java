@@ -1,6 +1,5 @@
 package com.Xeon.XeonWeb.services;
 
-import com.Xeon.XeonWeb.entities.Porosia;
 import com.Xeon.XeonWeb.entities.Procesi;
 import com.Xeon.XeonWeb.entities.Projekti;
 import com.Xeon.XeonWeb.repositories.ProcesiRepository;
@@ -47,7 +46,6 @@ public class ProjektiService {
             }
         }
     }
-
     @Transactional
     public void deleteProjekti(Integer id){
         projektiRepository.deleteById(id);
@@ -57,8 +55,10 @@ public class ProjektiService {
     public void updateTime(Integer projektiId){
         List<Optional<Procesi>> procesiList = procesiRepository.findByProjektId(projektiId);
         Projekti projekti = projektiRepository.findById(projektiId).get();
-        for(Optional<Procesi> procesi : procesiList){
-            projekti.setAfati(projekti.getAfati() + procesi.get().getKoha());
+        for (Optional<Procesi> procesi : procesiList) {
+            if (procesi.get().getFazaId() != 2) {
+                projekti.setAfati(projekti.getAfati() + procesi.get().getKoha());
+            }
         }
     }
 }

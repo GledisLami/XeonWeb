@@ -14,6 +14,8 @@ import java.util.List;
 @RequestMapping("/financa")
 public class FinancaController {
 
+    //TODO: create json formats for all mappings that have multiple parameters
+
     @Autowired
     private PorosiaService porosiaService;
 
@@ -37,6 +39,20 @@ public class FinancaController {
         return "Porosia nr u ruajt me sukses";
         //TODO: return id e porosise me anen e nje query qe kthen id te entry me recent ne databaze
         //select scope_identity() as id
+    }
+
+    //for adding a new porosia object
+    @PostMapping("/saveTest")
+    public String savePorosi(@RequestParam Integer userId,
+                             @RequestParam String comments) {
+        /*
+        {
+             "userId": 1,
+            "comments": "test"
+        }
+         */
+        porosiaService.savePorosi(userId, comments);
+        return "Porosia nr  "+ userId  +"u ruajt me sukses";
     }
 
     @DeleteMapping("/delete")

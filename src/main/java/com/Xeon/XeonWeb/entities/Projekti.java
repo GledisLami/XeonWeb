@@ -19,8 +19,8 @@ public class Projekti {
     private Integer afati;
 
     @Column
-    private Integer UserId;
+    private Integer userId;
 
     @Column
-    private Integer PorosiaId;
+    private Integer porosiaId;
 }

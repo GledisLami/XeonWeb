@@ -9,4 +9,6 @@ import java.util.Optional;
 @Repository
 public interface ProjektiRepository extends JpaRepository<Projekti, Integer> {
     Optional<Projekti> findById(Integer id);
+
+    Optional<Projekti> findByPorosiaId(Integer id);
 }
