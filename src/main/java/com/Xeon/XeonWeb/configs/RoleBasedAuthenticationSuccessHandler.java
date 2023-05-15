@@ -25,16 +25,16 @@ public class RoleBasedAuthenticationSuccessHandler implements AuthenticationSucc
         for (GrantedAuthority grantedAuthority : authorities) {
             String authorityName = grantedAuthority.getAuthority();
             if (authorityName.equals("ADMIN")) {
-                redirectStrategy.sendRedirect(request, response, "/admin");
+                redirectStrategy.sendRedirect(request, response, "/adminHtml");
                 return;
             } else if (authorityName.equals("STUDIO")) {
-                redirectStrategy.sendRedirect(request, response, "/inxhinier");
+                redirectStrategy.sendRedirect(request, response, "/inxhinierHtml");
                 return;
             } else if (authorityName.equals("FINANCA")) {
-                redirectStrategy.sendRedirect(request, response, "/financa");
+                redirectStrategy.sendRedirect(request, response, "/financaHtml");
                 return;
             } else if (authorityName.equals("OPERATOR")) {
-                redirectStrategy.sendRedirect(request, response, "/operatori");
+                redirectStrategy.sendRedirect(request, response, "/operatoriHtml");
                 return;
             }
         }
