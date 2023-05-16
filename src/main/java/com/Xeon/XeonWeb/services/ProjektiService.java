@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjektiService {
@@ -25,7 +26,9 @@ public class ProjektiService {
     private ProcesiRepository procesiRepository;
 
     public List<Projekti> getAllProjekte() {
-        return projektiRepository.findAll();
+        return projektiRepository.findAll().stream().
+                filter(projekti -> projekti.getPorosiaId() == 1).
+                collect(Collectors.toList());
     }
     //projekti ruhe automatikisht kur krijohet nje porosi
 //    public void saveProjekt(Projekti projekti){

@@ -92,14 +92,4 @@ public class FinancaController {
             return e.getMessage();
         }
     }
-
-    @PutMapping("/refuzo")
-    public String refuzoPorosi(@RequestParam Integer porosiaId) {
-        try {
-            porosiaService.refuzoPorosi(porosiaId);
-            return "Porosia nr "+ porosiaId + " u refuzua me sukses";
-        } catch (IllegalStateException e) {
-            return e.getMessage();
-        }
-    }
 }

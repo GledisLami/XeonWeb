@@ -54,13 +54,6 @@ public class PorosiaService {
         }
     }
 
-    @Transactional
-    public void refuzoPorosi(Integer id) {
-        if (porosiaRepository.findById(id).isPresent()) {
-            porosiaRepository.findById(id).get().setStatusi(2);
-        }
-    }
-
     //bug: nuk kthen id e porosise se fundit
 //    public Integer getCreatedId(){
 //        return porosiaRepository.findFirstByOrderByIdDesc();
