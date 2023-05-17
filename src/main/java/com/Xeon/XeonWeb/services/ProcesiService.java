@@ -61,11 +61,12 @@ public class ProcesiService {
     }
 
     @Transactional
-    public void updateProcesi(Integer procesiId, String procesi, Integer koha, String makineria, String tipiProcesit) {
+    public void updateProcesi(Integer procesiId, String pershkrimi, Integer koha,
+                              String makineria, String tipiProcesit, Integer sasia) {
         if (procesiRepository.findById(procesiId).isPresent()) {
             Procesi procesObj = procesiRepository.findById(procesiId).get();
-            if (procesi != null) {
-                procesObj.setProcesi(procesi);
+            if (pershkrimi != null) {
+                procesObj.setPershkrimi(pershkrimi);
             }
             if (koha != null) {
                 procesObj.setKoha(koha);
