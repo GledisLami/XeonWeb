@@ -30,18 +30,20 @@ public class ProcesiService {
 
     //ruan nje proces te ri. anash shfaqet kush e krijoi(userId)
     //projektiId eshte id e projektit ku do te shtohet procesi
-    public void saveProces(Integer userId, Integer projektiId, String procesi, Integer koha, String makineria) {
+    public void saveProces(Integer userId, Integer projektiId, String pershkrimi,
+                           Integer koha, String makineria, Integer sasia, String tipiProcesit) {
         Procesi procesiObj = new Procesi();
-        procesiObj.setProcesi(procesi);
+        procesiObj.setPershkrimi(pershkrimi);
         procesiObj.setKoha(koha);
         //we don't check it is a dropdown box, so it is always present
         procesiObj.setMakineriaId(makineriaRepository.findByMakineria(makineria).get().getId());
         procesiObj.setTipiProcesitId(tipiProcesitRepository.
-                findByTipiProcesit(procesi).get().getId());
+                findByTipiProcesit(tipiProcesit).get().getId());
         //kur krijohet nje proces 1 eshte kodi per ne pritje
         procesiObj.setFazaId(1);
         procesiObj.setProjektId(projektiId);
         procesiObj.setUserId(userId);
+        procesiObj.setSasia(sasia);
         procesiRepository.save(procesiObj);
         projektiService.updateTime(projektiId);
     }
@@ -74,12 +76,15 @@ public class ProcesiService {
             if (tipiProcesitRepository.findByTipiProcesit(tipiProcesit).isPresent()) {
                 procesObj.setTipiProcesitId(tipiProcesitRepository.findByTipiProcesit(tipiProcesit).get().getId());
             }
+            if (sasia != null && sasia > 0){
+                procesObj.setSasia(sasia);
+            }
         }
     }
 
     @Transactional
     public void updateFaza(Integer procesId, Integer fazaId){
-        if(procesiRepository.findById(procesId).isPresent() && fazaId != null && fazaId >=0 && fazaId <= 3){
+        if(procesiRepository.findById(procesId).isPresent() && fazaId != null && fazaId >=0 && fazaId < 3){
             Procesi proces = procesiRepository.findById(procesId).get();
             proces.setFazaId(fazaId);
         }

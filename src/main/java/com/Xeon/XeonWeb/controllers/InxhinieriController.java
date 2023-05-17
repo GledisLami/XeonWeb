@@ -75,38 +75,45 @@ public class InxhinieriController {
     @PostMapping("/proceset/save")
     public String saveProces(Principal auth,
                              @RequestParam Integer projektiId,
-                             @RequestParam String procesi,
+                             @RequestParam String pershkrimi,
                              @RequestParam Integer koha,
-                             @RequestParam String makineria) {
+                             @RequestParam String makineria,
+                             @RequestParam Integer sasia,
+                             @RequestParam String tipiProcesit) {
 
 //        if (!(userService.findByUsername(auth.getName()).isPresent())) {
 //            return "Porosia nuk u ruajt";
 //        }
         Integer userId = userService.findByUsername(auth.getName()).get().getId();
-        procesiService.saveProces(userId, projektiId, procesi, koha, makineria);
+        procesiService.saveProces(userId, projektiId, pershkrimi,
+                koha, makineria, sasia, tipiProcesit);
         return "Procesi u shtua me sukses";
     }
 
     @PostMapping("/proceset/saveTest")
     public String saveProcesTest(@RequestParam Integer userId,
-                             @RequestParam Integer projektiId,
-                             @RequestParam String procesi,
-                             @RequestParam Integer koha,
-                             @RequestParam String makineria) {
+                                 @RequestParam Integer projektiId,
+                                 @RequestParam String pershkrimi,
+                                 @RequestParam Integer koha,
+                                 @RequestParam String makineria,
+                                 @RequestParam Integer sasia,
+                                 @RequestParam String tipiProcesit) {
 
-        procesiService.saveProces(userId, projektiId, procesi, koha, makineria);
+        procesiService.saveProces(userId, projektiId, pershkrimi,
+                koha, makineria, sasia, tipiProcesit);
         return "Procesi u shtua me sukses";
     }
 
     //update dhe delete nuk duan projektId pasi id e procesit eshte unike
     @PutMapping("/proceset/update")
     public String updateProces(@RequestParam Integer procesiId,
-                               @RequestParam(required = false) String procesi,
+                               @RequestParam(required = false) String pershkrimi,
                                @RequestParam(required = false) Integer koha,
                                @RequestParam(required = false) String makineria,
-                               @RequestParam(required = false) String tipiProcesit) {
+                               @RequestParam(required = false) String tipiProcesit,
+                               @RequestParam(required = false) Integer sasia) {
         try {
-            procesiService.updateProcesi(procesiId, procesi, koha, makineria, tipiProcesit);
+            procesiService.updateProcesi(procesiId, pershkrimi, koha, makineria, tipiProcesit, sasia);
             return "Procesi u ndryshua me sukses";
         } catch (IllegalStateException e) {
             return e.getMessage();

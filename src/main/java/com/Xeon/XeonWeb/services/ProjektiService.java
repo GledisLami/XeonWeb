@@ -1,7 +1,9 @@
 package com.Xeon.XeonWeb.services;
 
+import com.Xeon.XeonWeb.entities.Porosia;
 import com.Xeon.XeonWeb.entities.Procesi;
 import com.Xeon.XeonWeb.entities.Projekti;
+import com.Xeon.XeonWeb.repositories.PorosiaRepository;
 import com.Xeon.XeonWeb.repositories.ProcesiRepository;
 import com.Xeon.XeonWeb.repositories.ProjektiRepository;
 import com.Xeon.XeonWeb.repositories.UserRepository;
@@ -11,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ProjektiService {
@@ -25,10 +26,22 @@ public class ProjektiService {
     @Autowired
     private ProcesiRepository procesiRepository;
 
+    @Autowired
+    private PorosiaRepository porosiaRepository;
+
     public List<Projekti> getAllProjekte() {
-        return projektiRepository.findAll().stream().
-                filter(projekti -> projekti.getPorosiaId() == 1).
-                collect(Collectors.toList());
+        List<Projekti> lista = projektiRepository.findAll();
+
+        for (int i =0; i < lista.size(); i++){
+            Integer porosiaIdTemp = lista.get(i).getPorosiaId();
+            Porosia porosiaTemp = porosiaRepository.findById(porosiaIdTemp).get();
+            if (porosiaTemp.getStatusi()!=1){
+                lista.remove(i);
+                i--;
+            }
+        }
+
+        return lista;
     }
     //projekti ruhe automatikisht kur krijohet nje porosi
 //    public void saveProjekt(Projekti projekti){

@@ -13,7 +13,7 @@ public class Projekti {
     private Integer id;
 
     @Column
-    private String comments;
+    private String comments; // do ruhet ne filepath, mos shto kolone ne databaze
 
     @Column
     private Integer afati;

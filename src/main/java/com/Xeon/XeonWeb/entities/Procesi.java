@@ -12,7 +12,7 @@ public class Procesi {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column
-    private String procesi;
+    private String pershkrimi; //todo:description duhet shtuar ne front te ing
     @Column
     private Integer koha;
     @Column
@@ -25,6 +25,8 @@ public class Procesi {
     private Integer makineriaId;
     @Column
     private Integer tipiProcesitId;
+    @Column
+    private Integer sasia;
 
     //todo: shto sasine e materialit
 }
