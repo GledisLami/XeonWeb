@@ -23,4 +23,7 @@ public class Projekti {
 
     @Column
     private Integer porosiaId;
+
+    @Column
+    private String progresi_proceseve;
 }

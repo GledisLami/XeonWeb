@@ -27,8 +27,8 @@ public class OperatoriController {
         return projektiService.getAllProjekte();
     }
 
-    @GetMapping("/{projektiId}/proceset")
-    public List<Optional<Procesi>> getAllProceset(@PathVariable Integer projektiId) {
+    @GetMapping("/proceset")
+    public List<Optional<Procesi>> getAllProceset(@RequestParam Integer projektiId) {
         return procesiService.getAllProceset(projektiId);
     }
 
@@ -36,7 +36,7 @@ public class OperatoriController {
     @PutMapping("/proceset/nis")
     public String nisProces(@RequestParam Integer procesiId) {
         try {
-            procesiService.updateFaza(procesiId, 1);
+            procesiService.updateFaza(procesiId, 2);
             return "Procesi u ndryshua me sukses";
         } catch (IllegalStateException e) {
             return e.getMessage();
@@ -46,7 +46,7 @@ public class OperatoriController {
     @PutMapping("/proceset/perfundo")
     public String perfundoProces(@RequestParam Integer procesiId) {
         try {
-            procesiService.updateFaza(procesiId, 2);
+            procesiService.updateFaza(procesiId, 3);
             return "Procesi u ndryshua me sukses";
         } catch (IllegalStateException e) {
             return e.getMessage();

@@ -60,7 +60,7 @@ public class FinancaController {
         porosia.setComments(comments);
         porosia.setUserId(userId);
         porosiaService.savePorosi(userId, comments);
-        return "Porosia nr "+ porosia.getId() +"u ruajt me sukses";
+        return "Porosia u ruajt me sukses";
     }
 
     @DeleteMapping("/delete")

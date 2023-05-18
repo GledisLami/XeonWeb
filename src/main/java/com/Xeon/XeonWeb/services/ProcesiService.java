@@ -57,7 +57,9 @@ public class ProcesiService {
 
     @Transactional
     public void deleteProcesi(Integer id) {
+        Integer projektId = procesiRepository.findById(id).get().getProjektId();
         procesiRepository.deleteById(id);
+        projektiService.updateTime(projektId);
     }
 
     @Transactional
@@ -85,7 +87,7 @@ public class ProcesiService {
 
     @Transactional
     public void updateFaza(Integer procesId, Integer fazaId){
-        if(procesiRepository.findById(procesId).isPresent() && fazaId != null && fazaId >=0 && fazaId < 3){
+        if(procesiRepository.findById(procesId).isPresent() && fazaId != null && fazaId >=1 && fazaId <= 3){
             Procesi proces = procesiRepository.findById(procesId).get();
             proces.setFazaId(fazaId);
         }

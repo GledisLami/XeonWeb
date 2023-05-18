@@ -39,8 +39,9 @@ public class ProjektiService {
                 lista.remove(i);
                 i--;
             }
+            String progresi = procesePerfunduar(lista.get(i).getId());
+            lista.get(i).setProgresi_proceseve(progresi);
         }
-
         return lista;
     }
     //projekti ruhe automatikisht kur krijohet nje porosi
@@ -83,5 +84,20 @@ public class ProjektiService {
             }
         }
         projekti.setAfati(totalKoha);
+    }
+
+    public Optional<Projekti> findByPorosiaId(Integer porosiaId){
+        return projektiRepository.findByPorosiaId(porosiaId);
+    }
+
+    public String procesePerfunduar(Integer projektiId){
+        List<Optional<Procesi>> procesiList = procesiRepository.findByProjektId(projektiId);
+        int count = 0;
+        for (Optional<Procesi> procesi : procesiList) {
+            if (procesi.isPresent() && procesi.get().getFazaId() == 3) {
+                count++;
+            }
+        }
+        return count + "/" + procesiList.size();
     }
 }

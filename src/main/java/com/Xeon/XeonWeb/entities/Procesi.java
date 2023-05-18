@@ -27,6 +27,4 @@ public class Procesi {
     private Integer tipiProcesitId;
     @Column
     private Integer sasia;
-
-    //todo: shto sasine e materialit
 }
