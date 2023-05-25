@@ -1,0 +1,89 @@
+<!DOCETYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Financa</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+    <link rel="stylesheet" href="style.css">
+    <script src="jquery.js"></script>  <!--per momentin nuk e kemi-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+
+<body>
+<section id="header">
+    <a href='#'><img src="img/logo.jpg " class="logo" alt=" "></a>
+    <div>
+        <ul id="navbar">
+            <li><a href="studio.html">Studio</a></li>
+            <li><a href="operatori.html">Operatori</a></li>
+            <li><a href="financa.html" class="active">Financa</a> </li>
+
+        </ul>
+    </div>
+</section>
+
+<section id="cart" class="section-p1">
+    <p>Pershendetje admin</p>
+    <table width="100%">
+        <thead>
+        <tr>
+            <td>ID perdoruesi</td>
+            <td>Id Projekti</td>
+            <td>Pershkrimi</td>
+            <td>Statusi</td>
+            <td>Mirato</td>
+            <td>Refuzo</td>
+        </tr>
+        </thead>
+        <tbody class="products">
+        </tbody>
+
+    </table>
+</section>
+
+<section id="cart-add" class="section-p1">
+    <div class="details">
+        <center>
+            <form name="RegForm" action="">
+                <h3>Shtoni nje oferte te re</h3>
+                <span id="nameError"></span><input type="text"  name="Name" placeholder="ID perdoruesi">
+                <span id="projectError"></span><textarea cols="30" rows="10" type="text" name="project" placeholder="Te dhena per projektin"></textarea>
+            </form>
+            <p>*Ju lutem plotesoni te dyja fushat</p>
+            <button id="shto" class="normal">Shto</button>
+        </center>
+    </div>
+    <div class="subtotal">
+
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal2" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close1">&times;</span>
+            <p>error!</p>
+        </div>
+
+    </div>
+    </div>
+
+</section>
+<div id="myModal2" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <span class="close1">&times;</span>
+        <p id="modal-description"></p>
+    </div>
+</div>
+<script src="financa.js"></script>
+</body>
+
+
+
+</html>

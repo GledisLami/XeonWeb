@@ -1,20 +1,18 @@
 console.log('running proceset');
 
 
-
-let  trueProjectId;
+let trueProjectId;
 start();
 
-function start(){
-    let projectName =document.querySelector("#project-description");
-    if(projectName){
-        trueProjectId= localStorage.getItem('projectId')
-        projectName.innerHTML= `<br><br/><center> <h2>Projekti: ${trueProjectId} </h2></center>`;
+function start() {
+    let projectName = document.querySelector("#project-description");
+    if (projectName) {
+        trueProjectId = localStorage.getItem('projectId')
+        projectName.innerHTML = `<br><br/><center> <h2>Projekti: ${trueProjectId} </h2></center>`;
 
-            displayProcesses(trueProjectId);
+        displayProcesses(trueProjectId);
     }
 }
-
 
 
 //Logjika e butonit shto
@@ -23,65 +21,64 @@ shto.addEventListener('click', () => {
     event.preventDefault(); //Per te shmangur auto reload
     var machineryType = document.getElementById("machinery-type").value;
     var processName = document.getElementById("process-name").value;
-    var quantity=document.getElementById("quantity").value;
-    var koha=document.getElementById("koha").value;
-    var pershkrimi=document.getElementById("text-description").value;;
-   
-   
+    var quantity = document.getElementById("quantity").value;
+    var koha = document.getElementById("koha").value;
+    var pershkrimi = document.getElementById("text-description").value;
+    ;
+
+
     $.ajax({
-        type:"POST", //USER ID DUHET NDRYSHUAR
-        url:'http://localhost:8090/xoen/inxhinieri/proceset/saveTest?userId=3&projektiId='+trueProjectId+'&pershkrimi='+pershkrimi+'&koha='+koha+'&makineria='+machineryType+'&sasia='+quantity+'&tipiProcesit='+processName,
+        type: "POST", //USER ID DUHET NDRYSHUAR
+        url: 'http://localhost:8090/xoen/inxhinieri/proceset/saveTest?userId=3&projektiId=' + trueProjectId + '&pershkrimi=' + pershkrimi + '&koha=' + koha + '&makineria=' + machineryType + '&sasia=' + quantity + '&tipiProcesit=' + processName,
         dataType: 'json',
         cache: true,
-        success: function(html){
+        success: function (html) {
             console.log(html);
             showModal(html);
             start();
         },
-        error: function (errMsg){
+        error: function (errMsg) {
             console.log(errMsg);
-            showModal('Porosia u shtua me sukses!!');
+            showModal('Procesi u shtua me sukses!!');
             start();
-           // showModal('ERROR! '+errMsg);
+            // showModal('ERROR! '+errMsg);
         }
 
     });
-    
 
-     
 
 });
 
 //Nese duam te nryshojme sasine
 let quantityInputs = document.querySelectorAll('#quantity');
-       
-for (let i = 0; i < quantityInputs.length; i++){          
-    quantityInputs[i].addEventListener('change',()=>{          
-      quantityChanged(event,i);
-    }); 
-  }
+
+for (let i = 0; i < quantityInputs.length; i++) {
+    quantityInputs[i].addEventListener('change', () => {
+        quantityChanged(event, i);
+    });
+}
 
 //Nese duam te nryshojme kohen
 let timeInputs = document.querySelectorAll('#koha');
-       
-for (let i = 0; i < timeInputs.length; i++){          
-    timeInputs[i].addEventListener('change',()=>{          
-    //console.log('produkti me index: ',i); 
-   
-      quantityChanged(event,i);
-    }); 
-  }
+
+for (let i = 0; i < timeInputs.length; i++) {
+    timeInputs[i].addEventListener('change', () => {
+        //console.log('produkti me index: ',i);
+
+        quantityChanged(event, i);
+    });
+}
 
 
-  function quantityChanged(event,i){
-       
-    var input= event.target;
-    if(isNaN(input.value)|| input.value<=0){
-       input.value=1;
-       }
-       start();
+function quantityChanged(event, i) {
 
-   
+    var input = event.target;
+    if (isNaN(input.value) || input.value <= 0) {
+        input.value = 1;
+    }
+    start();
+
+
 }
 
 

@@ -3,10 +3,9 @@ console.log('running studio');
 displayProjects();
 
 function displayProjects(){
-    
      $.ajax({
         type:"GET",
-        url:"http://localhost:8090/xoen/inxhinieri", // endpoint-i  localhost:8090/xoen/financa
+        url:"http://localhost:8090/xoen/inxhinieri", // endpoint-i  localhost:8090/xoen/inxhinieri
         dataType: 'json',
         cache: true,
         success: function(html){
@@ -21,71 +20,28 @@ function displayProjects(){
                             productContainer.innerHTML += ` 
                             <tr>
                                     <td>${item.id}</td>
-                                    
                                     <td>${item.afati}</td>
                                     <td>${item.progresi_proceseve}</td>
                                     <!--<td><input type="file" id="${i}" name="file" class= "normal"></td>-->
-                                    <td><button  class="normal confirm" id="${i}">Zgjidh proceset</button></td>
-                                    
+                                    <td><button  class="normal confirm" id="${i}">Zgjidh proceset</button></td>       
                                 </tr>
                             `;
                             i++;
-
                         });
-
                        //Nese duam te shofim proceset e nje projeti
                         let processButtons = document.querySelectorAll('.confirm');
                     for (let i = 0; i < processButtons.length; i++){
                         processButtons[i].addEventListener('click',()=>{
-                            console.log('dua te refuzoj',i);
-                            
+                            // console.log('dua te refuzoj',i);
                             localStorage.setItem('projectId',projects[i].id);
                             window.location.href='./proceset.html';
                         });     
                     }
-
-
-
                     }
-                  
-
-      
         },      
         error: function (errMsg){
                 console.log('ka error');
             }
-
         });
-    
-   
-
-
  }
-
-function getFinanceProject2 (){
- 
-    var projects=[{
-        name: 'Projekt1',
-        project: '1',
-        koha: '-',        
-    },
-    {
-        name: 'Projekt2',
-        project: '2',
-        koha: '-',     
-    },
-    {
-        name: 'Projekt3',
-        project: '3',
-        koha: '-',       
-    },
-    {
-        name: 'Projekt4',
-        project: '4',
-        koha: '-',
-    }];
-   
-    return projects;
-  
-}
 

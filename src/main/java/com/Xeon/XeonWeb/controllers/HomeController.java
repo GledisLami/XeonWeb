@@ -14,15 +14,15 @@ public class HomeController {
     public String home(Authentication authentication) {
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority authority : authorities) {
-            if (authority.getAuthority().equals("ADMIN")) {
+            if (authority.getAuthority().equals("ROLE_ADMIN")) {
                 return "redirect:/admin.html";
-            } else if (authority.getAuthority().equals("FINANCA")) {
+            } else if (authority.getAuthority().equals("ROLE_FINANCA")) {
                 return "redirect:/financa.html";
             }
-            else if (authority.getAuthority().equals("STUDIO")) {
+            else if (authority.getAuthority().equals("ROLE_STUDIO")) {
                 return "redirect:/studio.html";
             }
-            else if (authority.getAuthority().equals("OPERATOR")) {
+            else if (authority.getAuthority().equals("ROLE_OPERATOR")) {
                 return "redirect:/operatori.html";
             }
         }

@@ -1,5 +1,7 @@
 Login redirection working.
 Antmatchers not working
+On debug: Adding web access control expression [hasRole('ROLE_OPERATOR')] for Ant [pattern='/operatori/**']
+Changed all roles from OPERATOR to ROLE_OPERATOR etc.
 
 create database xoendb
 CREATE TABLE `roles` (
@@ -7,7 +9,7 @@ CREATE TABLE `roles` (
   `role` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
--- 1, 'ADMIN'; 2, 'FINANCA'; 3, 'STUDIO'; 4, 'OPERATOR'
+-- 1, 'ROLE_ADMIN'; 2, 'ROLE_FINANCA'; 3, 'ROLE_STUDIO'; 4, 'ROLE_OPERATOR'
 CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(45) DEFAULT NULL,
