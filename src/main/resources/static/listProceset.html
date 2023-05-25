@@ -1,0 +1,74 @@
+<!DOCETYPE html>
+	<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>ListProceset</title>
+		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+		<link rel="stylesheet" href="style.css">
+		<script src="jquery.js"></script>  <!--per momentin nuk e kemi-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<section id="header">
+			<a href='#'><img src="img/logo.jpg" width="15%" class="logo" alt=" "></a>
+			
+		</section>
+
+    <!----    <section id = "project-description">
+            <div>
+                <h2>Emri i projektit:Projekt1 - ID:1</h1>
+            </div>
+        </section>   -->
+
+     
+        <section id = "project-description">
+            	
+        </section>
+    
+		<section id="cart" class="section-p1">
+			<table width="100%">
+				<thead>
+					<tr>
+						<td>Makineria</td>
+						<td>Procesi</td>
+						<td>Sasia</td>
+            <td>Pershkrimi</td><!-- Duhet vene nje buton qe te shfaqi pershkrimin e procesit per operatorin, ate qe operatori duhet te punoje-->
+						<td>Statusi</td>
+            <td>Fillo</td>
+           <td>Mbaro</td>
+					</tr>
+				</thead>
+				<tbody class="products"></tbody>
+
+			</table>
+		</section>
+			<center>       
+            <buttont onclick="window.location.href='./operatori.html'" class="processes-done " id="ktheu">Kthehu</button>
+        	</center>
+        	<br><br>
+      <!--  <div>
+            <buttont onclick="window.location.href='./studio.html'" class="processes-done ">DONE</button>
+        </div>  -->
+				
+				<div id="myModal2" class="modal">
+
+					<!-- Modal content -->
+					<div class="modal-content">
+						<span class="close1">&times;</span>
+						<p id="modal-description"></p>
+					</div>
+				</div>
+
+		
+		
+		<script src="listProceset.js"></script>
+		<script src="search.js"></script>
+	</body>
+
+
+
+	</html>

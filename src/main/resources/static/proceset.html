@@ -1,0 +1,118 @@
+<!DOCETYPE html>
+	<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<title>Proceset</title>
+		<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+		<link rel="stylesheet" href="style.css">
+		<script src="jquery.js"></script>  <!--per momentin nuk e kemi-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<section id="header">
+			<a href='#'><img src="img/logo.jpg " class="logo" alt=" "></a>
+			
+		</section>
+
+        <section id = "project-description">
+            	
+        </section>
+
+      
+
+		<section id="cart" class="section-p1">
+			<table width="100%">
+				<thead>
+					<tr>
+						<td>Makineria</td>
+						<td>Tipi i Procesit</td>
+                        <td>ID Procesi </td>
+						<td>Koha</td>
+						<td>Sasia</td>
+                        <td>Faza</td>
+						
+                        <td> </td>
+					</tr>
+				</thead>
+				<tbody class="products">
+					
+				</tbody>
+
+			</table>
+		</section>
+
+			<center>       
+            <buttont onclick="window.location.href='./studio.html'" class="processes-done " id="ktheu">Kthehu</button>
+        	</center>
+        	<br><br>
+
+		  <section id = "add-new-process">
+            <div>
+            	
+                <form name="RegForm"class="form-horizontal">
+
+                    <div name="newProcess" class="form-group">
+                      <label for="machinery-type">Makineria:</label>
+                      <select id="machinery-type" name="machinery-type">
+                        <option value="Machine 1">Machine 1</option>
+                        <option value="Machine 2">Machine 2</option>
+                        <option value="Machine 3">Machine 3</option>
+						<option value="Machine 4">Machine 4</option>
+						<option value="Machine 5">Machine 5</option>
+                      </select>
+                    	</br>
+                    	<br><br/>
+
+                      <label for="process-name">Emri i procesit:</label>
+                      <select id="process-name" name="process-name">
+                        <option value="Torno">Torno</option>
+                        <option value="Freze">Freze</option>
+                        <option value="Prerje">Prerje</option>
+						<option value="Kontroll Cilesie">Kontroll Cilesie</option>
+						<option value="Pastrim">Pastrim</option>
+                      </select>
+                    </br>
+                    <br><br/>
+
+                      <label for="quantity">Sasia ne cope:</label>
+                      <input type="number" id="quantity" name="quantity" value="1">
+                   </br>
+                   <br><br/>
+                        <label for="koha">Koha ne ore:</label>
+                        <input type="number" id="koha" name="koha" value="1">
+                    </br>
+                    <br><br/>
+
+										<center>
+										<button id="shto" class="normal">Shto</button>
+       							</center>
+        					
+                    </div>
+
+                    <div class="description">
+                  	<textarea name="description" id="text-description" cols="30" rows="20" placeholder="Pershkrimi"></textarea>
+                  </div>
+                  </form>
+                  
+                  
+            </div>
+        </section>
+		<div id="myModal2" class="modal">
+
+			<!-- Modal content -->
+			<div class="modal-content">
+				<span class="close1">&times;</span>
+				<p id="modal-description"></p>
+			</div>
+		</div>
+
+		<script src="proceset.js"></script>	
+	</body>
+
+
+
+	</html>
