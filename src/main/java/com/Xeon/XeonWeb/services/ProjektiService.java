@@ -79,7 +79,7 @@ public class ProjektiService {
         Projekti projekti = projektiRepository.findById(projektiId).get();
         int totalKoha = 0;
         for (Optional<Procesi> procesi : procesiList) {
-            if (procesi.isPresent() && procesi.get().getFazaId() != 2) {
+            if (procesi.isPresent() && procesi.get().getFazaId() <=2) {
                 totalKoha += procesi.get().getKoha();
             }
         }

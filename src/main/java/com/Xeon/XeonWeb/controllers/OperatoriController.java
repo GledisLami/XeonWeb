@@ -2,6 +2,7 @@ package com.Xeon.XeonWeb.controllers;
 
 import com.Xeon.XeonWeb.entities.Procesi;
 import com.Xeon.XeonWeb.entities.Projekti;
+import com.Xeon.XeonWeb.repositories.ProcesiRepository;
 import com.Xeon.XeonWeb.services.ProcesiService;
 import com.Xeon.XeonWeb.services.ProjektiService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,9 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/operatori")
 public class OperatoriController {
+
+    @Autowired
+    private ProcesiRepository procesiRepository;
 
     @Autowired
     private ProjektiService projektiService;
@@ -47,6 +51,8 @@ public class OperatoriController {
     public String perfundoProces(@RequestParam Integer procesiId) {
         try {
             procesiService.updateFaza(procesiId, 3);
+            Procesi procesi = procesiRepository.findById(procesiId).get();
+            projektiService.updateTime(procesi.getProjektId());
             return "Procesi u ndryshua me sukses";
         } catch (IllegalStateException e) {
             return e.getMessage();
