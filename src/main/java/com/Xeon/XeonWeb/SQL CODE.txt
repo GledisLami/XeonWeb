@@ -1,3 +1,6 @@
+Login redirection working.
+Antmatchers not working
+
 create database xoendb
 CREATE TABLE `roles` (
   `id` int NOT NULL AUTO_INCREMENT,
