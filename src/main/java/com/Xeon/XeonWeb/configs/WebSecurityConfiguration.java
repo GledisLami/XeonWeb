@@ -3,6 +3,7 @@ package com.Xeon.XeonWeb.configs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,16 +26,17 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                .antMatchers(HttpMethod.GET)
+                .permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/engineer/**").hasRole("STUDIO")
-                .antMatchers("/finance/**").hasRole("FINANCA")
-                .antMatchers("/operator/**").hasRole("OPERATOR")
+//                .antMatchers("/admin/**").hasRole("ADMIN")
+//                .antMatchers("/inxhinieri/**").hasRole("STUDIO")
+//                .antMatchers("/financa/**").hasRole("FINANCA")
+//                .antMatchers("/operatori/**").hasRole("OPERATOR")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
 //                .loginPage("/login")
-//                .successHandler(new RoleBasedAuthenticationSuccessHandler()) // Set the custom success handler
                 .and()
                 .logout()
                 .logoutSuccessUrl("/login")
