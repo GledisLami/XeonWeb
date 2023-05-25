@@ -1,0 +1,19 @@
+create database xoendb
+CREATE TABLE `roles` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `role` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+-- 1, 'ADMIN'; 2, 'FINANCA'; 3, 'STUDIO'; 4, 'OPERATOR'
+CREATE TABLE `user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(45) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `role_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_user_role` (`role_id`),
+  CONSTRAINT `fk_user_role` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+SELECT * FROM USER
+-- create user3 with encrypted password named password3: $2a$10$F9Yv5fnrDSeEXpYanHt5hOiyTXml1P2WLNLE7VKqI4gniiFv9NbOa
